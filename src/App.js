@@ -1,19 +1,23 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Person from './Person/person';
 
-class App extends Component {
-  state = {
+const app = (props) => {
+  const [personState, setPersonsState] = useState({
     persons: [
-      {name: 'rohit', age: 22},
-      {name: 'mk', age: 0},
-      {name: 'mohit', age: 19}
-    ],
-    otherStateProperty: "i am other property"
-  }
+        {name: 'rohit', age: 22},
+        {name: 'mk', age: 0},
+        {name: 'mohit', age: 19}
+      ],
+    otherProperty: 'hi there'
+  });
 
-  switchStateMethod = () => {
-    this.setState({
+  const [otherState, setOtherState] = useState('hi there');
+
+  console.log(personState, otherState);
+
+  const switchStateMethod = () => {
+    setPersonsState({
       persons: [
         {name: 'rohit', age: 22},
         {name: 'unknown', age: 22},
@@ -22,19 +26,27 @@ class App extends Component {
     })
   }
 
-  render() {
-    return (
-      <div className="App">
-        <h1>Hi, I'm a react app.</h1>
-        <p>this is working</p>
-        <button onClick={this.switchStateMethod}>Change something</button>
-        <Person name={this.state.persons[0].name} age={this.state.persons[0].age} /><br></br>
-        <Person name={this.state.persons[1].name} age={this.state.persons[1].age}>Go for shopping</Person><br></br>
-        <Person name={this.state.persons[2].name} age={this.state.persons[2].age} />
-      </div>
-    );
+  return (
+    <div className="App">
+      <h1>Hi, I'm a react app.</h1>
+      <p>this is working</p>
+      <button onClick={switchStateMethod}>Change something</button>
+      <Person name={personState.persons[0].name} age={personState.persons[0].age} /><br></br>
+      <Person name={personState.persons[1].name} age={personState.persons[1].age}>Go for shopping</Person><br></br>
+      <Person name={personState.persons[2].name} age={personState.persons[2].age} />
+    </div>
+  );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Hi, I\'m a react app'));
-  }
 } 
 
-export default App;
+export default app;
+
+// state = {
+//   persons: [
+//     {name: 'rohit', age: 22},
+//     {name: 'mk', age: 0},
+//     {name: 'mohit', age: 19}
+//   ],
+//   otherStateProperty: "i am other property"
+// }
+
