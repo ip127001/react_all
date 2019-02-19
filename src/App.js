@@ -8,7 +8,18 @@ class App extends Component {
       {name: 'rohit', age: 22},
       {name: 'mk', age: 0},
       {name: 'mohit', age: 19}
-    ]
+    ],
+    otherStateProperty: "i am other property"
+  }
+
+  switchStateMethod = () => {
+    this.setState({
+      persons: [
+        {name: 'rohit', age: 22},
+        {name: 'unknown', age: 22},
+        {name: 'mohit', age: 19}
+      ]
+    })
   }
 
   render() {
@@ -16,10 +27,9 @@ class App extends Component {
       <div className="App">
         <h1>Hi, I'm a react app.</h1>
         <p>this is working</p>
-        <button>Change something</button>
-        <a href="https://www.sejda.com/mgl/compress-pdf-online">Compress PDF</a>
+        <button onClick={this.switchStateMethod}>Change something</button>
         <Person name={this.state.persons[0].name} age={this.state.persons[0].age} /><br></br>
-        <Person name={this.state.persons[1].name} age={this.state.persons[1].age}>Go for shopping<p>hi there</p></Person><br></br>
+        <Person name={this.state.persons[1].name} age={this.state.persons[1].age}>Go for shopping</Person><br></br>
         <Person name={this.state.persons[2].name} age={this.state.persons[2].age} />
       </div>
     );
