@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import Person from './Person/person';
+import Person from './Person/Person';
 
 class App extends Component {
   state = {
@@ -22,21 +22,43 @@ class App extends Component {
     })
   }
 
+  valueSwitchMethod = (event) => {
+    this.setState({
+      persons: [
+        {name: event.target.value, age: 22},
+        {name: 'mk', age: 0},
+        {name: 'mohit', age: 19}
+      ],
+    })
+  }
   render() {
-    return (
+    const style = {
+      backgroundColor: 'white',
+      font: 'inherit',
+      border: '1px solid blue',
+      cursor: 'pointer'
+    }
+
+    return (  
       <div className="App">
         <h1>Hi, I'm a react app.</h1>
         <p>this is working</p>
-        <button onClick={() => this.switchStateMethod('max')}>Change something</button>
-        <Person 
+        <button style={style} onClick={() => this.switchStateMethod('max')}>Change something</button>
+
+        <Person
           name={this.state.persons[0].name} 
-          age={this.state.persons[0].age} /><br></br>
+          age={this.state.persons[0].age} />
+        <br></br>
+
         <Person 
           name={this.state.persons[1].name} 
           age={this.state.persons[1].age}
-          click={this.switchStateMethod.bind(this, 'max')}
-          >Go for shopping</Person><br></br>
-        <Person name={this.state.persons[2].name} age={this.state.persons[2].age} />
+          changed={this.valueSwitchMethod} />
+        <br></br>
+
+        <Person 
+          name={this.state.persons[2].name} 
+          age={this.state.persons[2].age} />
       </div>
     );
   }
