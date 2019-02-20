@@ -9,7 +9,7 @@ const person = (props) => {
             <p onClick={props.click}>{props.name}</p>       
             <p>{props.age}</p>
             <input type="text" onChange={props.changed} defaultValue={props.name}></input>
-        </div>
+        </div>  
     )
 }
 
