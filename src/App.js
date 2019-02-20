@@ -9,7 +9,8 @@ class App extends Component {
       {name: 'mk', age: 0},
       {name: 'mohit', age: 19}
     ],
-    otherStateProperty: "i am other property"
+    otherStateProperty: "i am other property",
+    showPersons: false
   }
 
   switchStateMethod = (name) => {
@@ -20,6 +21,11 @@ class App extends Component {
         {name: 'mohit', age: 19}
       ]
     })
+  }
+
+  togglePersonsHandler = () => {
+    const doesShow = this.state.showPersons;
+    this.setState({showPersons: !doesShow});
   }
 
   valueSwitchMethod = (event) => {
@@ -43,22 +49,33 @@ class App extends Component {
       <div className="App">
         <h1>Hi, I'm a react app.</h1>
         <p>this is working</p>
-        <button style={style} onClick={() => this.switchStateMethod('max')}>Change something</button>
 
-        <Person
-          name={this.state.persons[0].name} 
-          age={this.state.persons[0].age} />
-        <br></br>
+        <button 
+          style={style} 
+          onClick={this.togglePersonsHandler}>
+        Change something</button>
 
-        <Person 
-          name={this.state.persons[1].name} 
-          age={this.state.persons[1].age}
-          changed={this.valueSwitchMethod} />
-        <br></br>
+        {
+          this.state.showPersons === true ? 
+            <div>
+            <Person
+              name={this.state.persons[0].name} 
+              age={this.state.persons[0].age} />
+            <br></br>
 
-        <Person 
-          name={this.state.persons[2].name} 
-          age={this.state.persons[2].age} />
+            <Person 
+              name={this.state.persons[1].name} 
+              age={this.state.persons[1].age}
+              changed={this.valueSwitchMethod} />
+            <br></br>
+
+            <Person 
+              name={this.state.persons[2].name} 
+              age={this.state.persons[2].age} />
+          </div>
+          : null
+        }
+
       </div>
     );
   }
