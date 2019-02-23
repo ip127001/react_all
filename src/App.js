@@ -5,32 +5,42 @@ import Person from './Person/Person';
 class App extends Component {
   state = {
     persons: [
-      {name: 'rohit', age: 22},
-      {name: 'mk', age: 0},
-      {name: 'mohit', age: 19}
+      {id: 'abc11', name: 'rohit', age: 22},
+      {id: 'abc12', name: 'mk', age: 0},
+      {id: 'abc13', name: 'mohit', age: 19}
     ],
-    otherStateProperty: "i am other property"
+    otherStateProperty: "i am other property",
+    showPersons: false
   }
 
-  switchStateMethod = (name) => {
-    this.setState({
-      persons: [
-        {name: name, age: 22},
-        {name: 'unknown', age: 22},
-        {name: 'mohit', age: 19}
-      ]
-    })
+  deletePersonHandler = (personIndex) => {
+    // const persons = this.state.persons.slice();
+    const persons = [...this.state.persons];
+    persons.splice(personIndex, 1);
+    this.setState({persons: persons});
   }
 
-  valueSwitchMethod = (event) => {
-    this.setState({
-      persons: [
-        {name: event.target.value, age: 22},
-        {name: 'mk', age: 0},
-        {name: 'mohit', age: 19}
-      ],
-    })
+  togglePersonsHandler = () => {
+    const doesShow = this.state.showPersons;
+    this.setState({showPersons: !doesShow});
   }
+
+  valueSwitchMethod = (event, id) => {
+    const personIndex = this.state.persons.findIndex(p => {
+      return p.id === id;
+    });
+
+    const person = {
+      ...this.state.persons[personIndex]
+    }
+    person.name = event.target.value;
+
+    const persons = [...this.state.persons];
+    persons[personIndex] = person;
+
+    this.setState({persons: persons});
+  }
+
   render() {
     const style = {
       backgroundColor: 'white',
@@ -39,26 +49,36 @@ class App extends Component {
       cursor: 'pointer'
     }
 
+    let persons = null;
+
+    if (this.state.showPersons) {
+      persons = (
+        <div>
+          {this.state.persons.map((person, index) => {
+            return <Person 
+              click={() => this.deletePersonHandler(index)}
+              name={person.name}
+              age={person.age}
+              key={person.id}
+              changed={(event) => this.valueSwitchMethod(event, person.id)}
+              />
+          })}
+        </div>
+      )
+    }
+
     return (  
       <div className="App">
         <h1>Hi, I'm a react app.</h1>
         <p>this is working</p>
-        <button style={style} onClick={() => this.switchStateMethod('max')}>Change something</button>
 
-        <Person
-          name={this.state.persons[0].name} 
-          age={this.state.persons[0].age} />
-        <br></br>
-
-        <Person 
-          name={this.state.persons[1].name} 
-          age={this.state.persons[1].age}
-          changed={this.valueSwitchMethod} />
-        <br></br>
-
-        <Person 
-          name={this.state.persons[2].name} 
-          age={this.state.persons[2].age} />
+        <button 
+          style={style} 
+          onClick={this.togglePersonsHandler}>
+        Change something</button>
+  
+        {persons}
+  
       </div>
     );
   }
