@@ -5,22 +5,19 @@ import Person from './Person/Person';
 class App extends Component {
   state = {
     persons: [
-      {name: 'rohit', age: 22},
-      {name: 'mk', age: 0},
-      {name: 'mohit', age: 19}
+      {id: 'abc11', name: 'rohit', age: 22},
+      {id: 'abc12', name: 'mk', age: 0},
+      {id: 'abc13', name: 'mohit', age: 19}
     ],
     otherStateProperty: "i am other property",
     showPersons: false
   }
 
-  switchStateMethod = (name) => {
-    this.setState({
-      persons: [
-        {name: name, age: 22},
-        {name: 'unknown', age: 22},
-        {name: 'mohit', age: 19}
-      ]
-    })
+  deletePersonHandler = (personIndex) => {
+    // const persons = this.state.persons.slice();
+    const persons = [...this.state.persons];
+    persons.splice(personIndex, 1);
+    this.setState({persons: persons});
   }
 
   togglePersonsHandler = () => {
@@ -37,6 +34,7 @@ class App extends Component {
       ],
     })
   }
+
   render() {
     const style = {
       backgroundColor: 'white',
@@ -50,10 +48,12 @@ class App extends Component {
     if (this.state.showPersons) {
       persons = (
         <div>
-          {this.state.persons.map(person => {
+          {this.state.persons.map((person, index) => {
             return <Person 
+              click={() => this.deletePersonHandler(index)}
               name={person.name}
               age={person.age}
+              key={person.id}
               />
           })}
         </div>
