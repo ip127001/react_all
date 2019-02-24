@@ -92,31 +92,16 @@ class App extends Component {
         <div className="App">
           <h1>Hi, I'm a react app.</h1>
           <p className={classes.join(' ')}>this is working</p>
-
           <button 
             style={style} 
             onClick={this.togglePersonsHandler}>
-            Change something</button>
-    
+            Change something
+          </button>
           {persons}
         </div>
       </StyleRoot>
     );
   }
-    // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Hi, I\'m a react app'));
 } 
 
 export default Radium(App);
-
-
-
-// const [personState, setPersonsState] = useState({
-//   persons: [
-//       {name: 'rohit', age: 22},
-//       {name: 'mk', age: 0},
-//       {name: 'mohit', age: 19}
-//     ],
-//   otherProperty: 'hi there'
-// });
-
-// const [otherState, setOtherState] = useState('hi there');
