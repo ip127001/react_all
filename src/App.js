@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import classes from './App.css';
 import Person from './Person/Person';
 
 class App extends Component {
@@ -42,14 +42,8 @@ class App extends Component {
   }
 
   render() {
-    const style = {
-      backgroundColor: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      cursor: 'pointer'
-    }
-
     let persons = null;
+    let btnClass = '';
 
     if (this.state.showPersons) {
       persons = (
@@ -60,42 +54,37 @@ class App extends Component {
               name={person.name}
               age={person.age}
               key={person.id}
-              changed={(event) => this.valueSwitchMethod(event, person.id)}
-              />
+              changed={(event) => this.valueSwitchMethod(event, person.id)} />
           })}
         </div>
       )
+      btnClass = classes.Red;
     }
 
-    return (  
-      <div className="App">
-        <h1>Hi, I'm a react app.</h1>
-        <p>this is working</p>
+    const classe = [];
+    if(this.state.persons.length <= 2) {
+      classe.push(classes.red);
+    }
 
+    if(this.state.persons.length <= 1) {
+      classe.push(classes.bold);
+    }
+
+    return (
+      <div className={classes.App}>
+        <h1>Hi, I'm a react app.</h1>
+        <p className={classe.join(' ')}>this is working</p>
+        
         <button 
-          style={style} 
+          className={btnClass}
           onClick={this.togglePersonsHandler}>
-        Change something</button>
-  
+          Change something
+        </button>
+        
         {persons}
-  
       </div>
     );
   }
-    // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Hi, I\'m a react app'));
 } 
 
 export default App;
-
-
-
-// const [personState, setPersonsState] = useState({
-//   persons: [
-//       {name: 'rohit', age: 22},
-//       {name: 'mk', age: 0},
-//       {name: 'mohit', age: 19}
-//     ],
-//   otherProperty: 'hi there'
-// });
-
-// const [otherState, setOtherState] = useState('hi there');

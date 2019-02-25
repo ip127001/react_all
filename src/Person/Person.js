@@ -1,10 +1,10 @@
 import React from 'react';
 
-import './Person.css';
+import classes from './Person.css';
 
 const person = (props) => {
     return (
-        <div className="Person">
+        <div className={classes.Person}>
             <p>Hi there i am new component</p>
             <p onClick={props.click}>I am {props.name} of age {props.age}</p>
             <p>{props.children}</p>
