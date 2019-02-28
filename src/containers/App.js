@@ -19,6 +19,7 @@ class App extends Component {
     showPersons: false
   }
 
+
   static getDerivedStateFromProps(props, state) {
     console.log('[App.js] getDerivedStateFromProps', props);
     return state;
@@ -27,7 +28,7 @@ class App extends Component {
   componentDidMount() {
     console.log('[App.js] componentDidMount');
   }
-  
+
   deletePersonHandler = (personIndex) => {
     // const persons = this.state.persons.slice();
     const persons = [...this.state.persons];
