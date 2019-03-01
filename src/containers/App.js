@@ -32,7 +32,7 @@ class App extends Component {
 
   shouldComponentUpdate(nextProps, nextState){
     console.log('[App.js] shouldComponentUpdate');
-    return true;
+    return true;  
   }
 
   componentDidUpdate(){
@@ -91,6 +91,7 @@ class App extends Component {
           persons={this.state.persons} 
           showPersons={this.state.showPersons} 
           clicked={this.togglePersonsHandler}></Cockpit> : null}
+          
         {persons}
       </div>
     );
