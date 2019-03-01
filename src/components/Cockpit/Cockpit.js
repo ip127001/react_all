@@ -4,10 +4,21 @@ import classes from './Cockpit.css';
 const cockpit = (props) => {
     useEffect(() => {
         console.log('[Cockpit.js] useEffect');
-        setTimeout(() => {
+        const timer = setTimeout(() => {
             alert('saved to the cloud');
         }, 1000);
-    }, [props.persons])
+        return () => {
+            clearTimeout(timer);
+            console.log('1st useEffect clean up')
+        }
+    }, []);
+
+    useEffect(() => {
+        console.log('2nd useEffect')
+        return () => {
+            console.log('2nd useEffect clean up work');
+        }
+    });
 
     const classe = [];
     let btnClass = '';
