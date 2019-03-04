@@ -109,7 +109,7 @@ render() {
             </Cockpit>
           ): null}
         {persons}
-        </AuthContext.Provider>
+        </AuthContext.Provider> 
       </Aux>
     )
 }    
