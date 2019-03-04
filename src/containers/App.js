@@ -19,7 +19,8 @@ class App extends Component {
     ],
     otherStateProperty: "i am other property",
     showPersons: false,
-    showCockpit: true
+    showCockpit: true,
+    changeCounter: 0
   }
 
 
@@ -66,20 +67,24 @@ class App extends Component {
     const persons = [...this.state.persons];
     persons[personIndex] = person;
 
-    this.setState({persons: persons});
-  }
+    this.setState((prevState, props) => {
+      return {
+        persons: persons,
+        changeCounter: prevState.changeCounter + 1
+      };
+    }); 
+  };
 
-  render() {
+render() {
     console.log('[App.js] render');
     let persons = null;
 
     if (this.state.showPersons) {
       persons = (
           <Persons
-          persons={this.state.persons}
-          clicked={this.deletePersonHandler}
-          changed={this.valueSwitchMethod}
-          ></Persons>
+            persons={this.state.persons}
+            clicked={this.deletePersonHandler}
+            changed={this.valueSwitchMethod}></Persons>
       )
     }
 
@@ -92,7 +97,7 @@ class App extends Component {
           personsLength={this.state.persons.length} 
           showPersons={this.state.showPersons} 
           clicked={this.togglePersonsHandler}></Cockpit> : null}
-          
+        
         {persons}
       </Aux>
     )
