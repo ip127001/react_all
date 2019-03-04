@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import classes from './Cockpit.css';
+import AuthContext from '../../context/auth-context';
 
 const cockpit = (props) => {
     const togglebtnRef = useRef(null);
@@ -10,6 +11,7 @@ const cockpit = (props) => {
         //     alert('saved to the cloud');
         // }, 1000);
         togglebtnRef.current.click();
+
         return () => {
             // clearTimeout(timer);
             console.log('1st useEffect clean up')
@@ -41,13 +43,21 @@ const cockpit = (props) => {
     return (
         <div className={classes.Cockpit}>
             <h1>{props.title}</h1>
+
             <p className={classe.join(' ')}>this is working</p>
+            
             <button 
                 ref={togglebtnRef}
                 className={btnClass}
                 onClick={props.clicked}>
             Change something
             </button>
+            
+            <AuthContext.Consumer>
+                {(context) =>  
+                <button onClick={context.login}>Login</button>
+                }
+            </AuthContext.Consumer>
         </div>
     );
 }
